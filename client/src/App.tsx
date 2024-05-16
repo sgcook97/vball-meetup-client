@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
@@ -9,10 +9,13 @@ import ProfilePage from "./pages/ProfilePage";
 
 export default function App() {
 
-  const [theme, setTheme] = useState("light");
-
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
 
   useEffect(() => {
+    localStorage.setItem('theme', theme);
+    
     const htmlElement = document.querySelector('html');
     if (htmlElement) {
       htmlElement.setAttribute('data-color-theme', theme);
