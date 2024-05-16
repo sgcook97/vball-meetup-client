@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { CiMenuBurger } from "react-icons/ci";
-import { CgMenu } from "react-icons/cg";
 
 export default function Dropdown() {
     const [isOpen, setIsOpen] = useState(false);
