@@ -73,9 +73,12 @@ export default function Register() {
                     duration-200'
                     type='submit'
                 >
-                    Login
+                    Register
                 </button>
             </form>
+            <div>
+                <a className='text-onBackground hover:text-secondary transition underline' href='/login'>Already have an account?</a>
+            </div>
         </div>
     );
 };

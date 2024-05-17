@@ -4,15 +4,15 @@ import { AuthContext } from '../services/AuthContext';
 
 const Logout = () => {
     const navigate = useNavigate();
-    const { logout } : any = useContext(AuthContext)
+    const { logout } : any = useContext(AuthContext);
 
     const handleLogout = () => {
-        logout()
+        logout();
         navigate('/login');
     };
 
     return (
-        <button onClick={handleLogout}>Logout</button>
+        <button className="text-onBackground hover:text-secondary transition" onClick={handleLogout}>Logout</button>
     );
 };
 

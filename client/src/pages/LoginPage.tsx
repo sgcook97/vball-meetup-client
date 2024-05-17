@@ -60,6 +60,9 @@ export default function Login() {
                     Login
                 </button>
             </form>
+            <div>
+                <a className='text-onBackground hover:text-secondary transition underline' href='/register'>Don't have an account?</a>
+            </div>
         </div>
     );
 };

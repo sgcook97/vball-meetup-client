@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <Router>
-      <Header toggleTheme={toggleTheme} />
+      <Header currentTheme={theme} toggleTheme={toggleTheme} />
       <Routes>
         {/* Publicly accesible routes */}
         <Route path='/' element={<HomePage />} />
