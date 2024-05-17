@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoMdHome } from "react-icons/io";
 import { FaUserGroup } from "react-icons/fa6";
 import { FaPlusSquare } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import Dropdown from './Dropdown';
 import Logout from "./Logout";
+import { AuthContext } from "../services/AuthContext";
 
 type HeaderProps = {
     toggleTheme: () => void;
 }
 
 export default function Header({ toggleTheme } : HeaderProps) {
-    const currentUser = localStorage.getItem('user')
-
+    
+    const { currentUser } : any = useContext(AuthContext);
+    
     return (
         <div className='text-primary flex justify-between items-center w-full
         h-[3.5rem] px-5 py-3 fixed top-0 z-50 bg-background border-b border-b-onBackground/10'>

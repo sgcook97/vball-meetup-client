@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { AuthContext } from '../services/AuthContext';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
 
-    const BLOCKPARTY_API_URL: string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
+    const { login } : any = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post(`${BLOCKPARTY_API_URL}/auth/login`, {
+            await login({
                 email,
-                password,
-            });
-            const user = response.data;
-            localStorage.setItem('user', JSON.stringify(user));
+                password
+            })
             navigate('/');
         } catch (error) {
             console.error('Error logging in:', error);
         }
+    };
+
+
+    const isFormValid = () => {
+        return email.trim() !== "" && password.trim() !== "";
     };
 
     return (
@@ -52,6 +55,7 @@ export default function Login() {
                     rounded-md hover:bg-secondary hover:text-onSecondary transition 
                     duration-200'
                     type='submit'
+                    disabled={!isFormValid()}
                 >
                     Login
                 </button>

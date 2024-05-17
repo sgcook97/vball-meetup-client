@@ -8,6 +8,7 @@ import CreatePostPage from "./pages/CreatePostPage";
 import ProfilePage from "./pages/ProfilePage";
 import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
+import ProtectedRoute from "./services/ProtectedRoute";
 
 export default function App() {
 
@@ -32,12 +33,17 @@ export default function App() {
     <Router>
       <Header toggleTheme={toggleTheme} />
       <Routes>
+        {/* Publicly accesible routes */}
         <Route path='/' element={<HomePage />} />
         <Route path='/find-group' element={<FindGroupPage />} />
-        <Route path='/create-post' element={<CreatePostPage />} />
-        <Route path='/profile' element={<ProfilePage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+
+        {/* Restricted routes */}
+        <Route path='/create-post' element={<ProtectedRoute><CreatePostPage /></ProtectedRoute>} />
+        <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+
+        {/* Page not found */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
