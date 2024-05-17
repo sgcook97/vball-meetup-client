@@ -6,6 +6,8 @@ import FindGroupPage from "./pages/FindGroupPage";
 import Header from "./components/Header";
 import CreatePostPage from "./pages/CreatePostPage";
 import ProfilePage from "./pages/ProfilePage";
+import Login from "./pages/LoginPage";
+import Register from "./pages/RegisterPage";
 
 export default function App() {
 
@@ -34,6 +36,8 @@ export default function App() {
         <Route path='/find-group' element={<FindGroupPage />} />
         <Route path='/create-post' element={<CreatePostPage />} />
         <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>

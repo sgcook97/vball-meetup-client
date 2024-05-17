@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // Import Axios
+import authHeader from '../services/auth-header';
+import getUser from '../services/get-user';
 
 export default function PostForm() {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [content, setContent] = useState('');
+  const [skillLevel, setSkillLevel] = useState('');
 
   const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
 
   const handlePost = async () => {
     try {
-      const response = await axios.post<{ id: string }>(`${BLOCKPARTY_API_URL}/post`, {
-        title,
-        location,
-        content,
-      });
+      const poster = getUser()
+      const response = await axios.post(`${BLOCKPARTY_API_URL}/post/create-post`, 
+        {
+          poster, 
+          title,
+          location,
+          content,
+          skillLevel
+        },
+        {
+          headers: authHeader(),
+        }
+      );
 
       console.log('Post created:', response.data);
 
       setTitle('');
       setLocation('');
       setContent('');
+      setSkillLevel('');
     } catch (error) {
       console.error('Error creating post:', error);
     }
@@ -48,6 +60,13 @@ export default function PostForm() {
           placeholder='Location'
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+        />
+        <input className='rounded-md w-full bg-onBackground/[0.01]
+          border-2 border-onBackground/10 pl-1 py-1' 
+          type="text" 
+          placeholder='Skill Level'
+          value={skillLevel}
+          onChange={(e) => setSkillLevel(e.target.value)}
         />
         <textarea className='rounded-md w-full h-[10rem] pl-1 py-1 
           bg-onBackground/[0.01] border-2 border-onBackground/10' 
