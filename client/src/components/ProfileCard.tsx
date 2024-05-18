@@ -39,32 +39,40 @@ export default function ProfileCard() {
             </h2>
             <div>
                 <div className='flex justify-between w-full'>
-                    <p>Username:</p>
+                    <p className='text-primary font-semibold'>Username:</p>
                     <p>{user?.username}</p>
                 </div>
                 <div className='flex justify-between w-full'>
-                    <p>Email:</p>
+                    <p className='text-primary font-semibold'>Email:</p>
                     <p>{user?.email}</p>
                 </div>
                 <div className='flex justify-between w-full'>
-                    <p>Skill Level:</p>
+                    <p className='text-primary font-semibold'>Skill Level:</p>
                     <p>{user?.skillLevel}</p>
                 </div>
                 <div className='flex justify-between w-full'>
                     {user?.favoriteLocations ?  
                         <div className='flex justify-between w-full'>
-                            <p>
-                                Favorite Locations: 
-                                {user?.favoriteLocations?.map((location, index) => (
-                                    <p key={index}>{location}</p>
-                                ))}
+                            <p className='text-primary font-semibold'>
+                                Favorite Locations:
                             </p>
+                            {user?.favoriteLocations?.map((location, index) => (
+                                <p key={index}>{location}</p>
+                            ))}
                         </div>
                         : <></>
                     }
                 </div> 
             </div>
-                
+            <div className='mt-4 flex justify-center items-center'>
+                <a className='bg-onSurface/40 text-center rounded-md
+                    px-3 py-1' 
+                    href="/edit-profile"
+                >
+                    Edit Profile
+                </a>
+            </div>
+            
         </div>
     )
 }

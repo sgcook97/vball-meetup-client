@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import ProtectedRoute from "./services/ProtectedRoute";
+import EditProfilePage from "./pages/EditProfilePage";
 
 export default function App() {
 
@@ -42,6 +43,7 @@ export default function App() {
         {/* Restricted routes */}
         <Route path='/create-post' element={<ProtectedRoute><CreatePostPage /></ProtectedRoute>} />
         <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path='/edit-profile' element={<ProtectedRoute><EditProfilePage /></ProtectedRoute>} />
 
         {/* Page not found */}
         <Route path="*" element={<ErrorPage />} />
