@@ -1,36 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import getUser from '../services/get-user';
-import axios from 'axios';
-import authHeader from '../services/auth-header';
-
-interface User {
-    userId: string;
-    username: string;
-    email: string;
-    skillLevel: string;
-    favoriteLocations: Array<string> | null;
-}
+import { useContext } from 'react';
+import { AuthContext } from '../services/AuthContext';
 
 export default function ProfileCard() {
-    const [user, setUser] = useState<User | null>(null);
-    const userId = getUser();
-    const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get(`${BLOCKPARTY_API_URL}/user/${userId}`,
-                {
-                  headers: authHeader(),
-                });
-                setUser(response.data);
-            } catch (error) {
-                console.error('Error fetching user:', error);
-            }
-        };
-
-        fetchUser();
-    }, [userId]);
+    const authContext = useContext(AuthContext);
+    const user = authContext?.currentUser;
 
     return (
         <div className='flex flex-col justify-center w-[60%] h-full'>
@@ -51,16 +24,17 @@ export default function ProfileCard() {
                     <p>{user?.skillLevel}</p>
                 </div>
                 <div className='flex justify-between w-full'>
-                    {user?.favoriteLocations ?  
+                    {user?.favoritePlaces.length === 0 ?  
+                        <></>
+                        : 
                         <div className='flex justify-between w-full'>
                             <p className='text-primary font-semibold'>
                                 Favorite Locations:
                             </p>
-                            {user?.favoriteLocations?.map((location, index) => (
-                                <p key={index}>{location}</p>
+                            {user?.favoritePlaces?.map((place, index) => (
+                                <p key={index}>{place}</p>
                             ))}
                         </div>
-                        : <></>
                     }
                 </div> 
             </div>

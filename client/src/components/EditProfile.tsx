@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
+import { useState } from 'react';
 import { Select, Option } from '@material-tailwind/react';
 import axios from 'axios';
 import getUser from '../services/get-user';
 import authHeader from '../services/auth-header';
-
-const skillLevels = [
-    'AA/Open',
-    'A',
-    'BB',
-    'B',
-    'C'
-];
+import { skillLevels } from '../lib/data';
 
 export default function EditProfile() {
     const [newSkillLevel, setNewSkillLevel] = useState<string | undefined>('');
@@ -43,7 +35,9 @@ export default function EditProfile() {
                         value={newSkillLevel}
                         error={newSkillLevel === '' ? true : false}
                         onChange={(e) => setNewSkillLevel(e)}
-                    >
+                        placeholder={undefined}
+                        onPointerEnterCapture=''
+                        onPointerLeaveCapture=''                   >
                         {skillLevels.map((level, index) => (
                             <Option key={index} value={level}>{level}</Option>
                         ))}
