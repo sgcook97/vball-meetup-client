@@ -61,8 +61,9 @@ export default function Login() {
                     Login
                 </button>
             </form>
-            <div>
+            <div className='flex flex-col text-center'>
                 <a className='text-onBackground hover:text-secondary transition underline' href='/register'>Don't have an account?</a>
+                <a className='text-onBackground hover:text-secondary transition underline' href="/forgot-password">Forgot password?</a>
             </div>
             <ToastContainer />
         </div>

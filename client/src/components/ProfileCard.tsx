@@ -24,7 +24,7 @@ export default function ProfileCard() {
                     <p>{user?.skillLevel}</p>
                 </div>
                 <div className='flex justify-between w-full'>
-                    {user?.favoritePlaces.length === 0 ?  
+                    {user?.favoritePlaces?.length === 0 ?  
                         <></>
                         : 
                         <div className='flex justify-between w-full'>

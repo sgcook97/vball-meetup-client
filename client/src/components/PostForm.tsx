@@ -3,13 +3,13 @@ import axios from 'axios'; // Import Axios
 import authHeader from '../services/auth-header';
 import getUser from '../services/get-user';
 
+const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
+
 export default function PostForm() {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [content, setContent] = useState('');
   const [skillLevel, setSkillLevel] = useState('');
-
-  const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
 
   const handlePost = async () => {
     try {

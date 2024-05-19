@@ -10,6 +10,8 @@ import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import ProtectedRoute from "./services/ProtectedRoute";
 import EditProfilePage from "./pages/EditProfilePage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 export default function App() {
 
@@ -39,6 +41,8 @@ export default function App() {
         <Route path='/find-group' element={<FindGroupPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+        <Route path='/reset-password/:token' element={<ResetPasswordPage />} />
 
         {/* Restricted routes */}
         <Route path='/create-post' element={<ProtectedRoute><CreatePostPage /></ProtectedRoute>} />
