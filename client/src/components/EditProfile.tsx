@@ -1,26 +1,37 @@
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Select, Option } from '@material-tailwind/react';
 import axios from 'axios';
 import getUser from '../services/get-user';
 import authHeader from '../services/auth-header';
 import { skillLevels } from '../lib/data';
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../services/AuthContext';
 
 export default function EditProfile() {
     const [newSkillLevel, setNewSkillLevel] = useState<string | undefined>('');
     const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
+    const authContext = useContext(AuthContext);
+    let user = authContext?.currentUser;
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: React.FormEvent ) => {
+        e.preventDefault();
         try {
             const userId = getUser();
             await axios.put(`${BLOCKPARTY_API_URL}/user/${userId}/skill-level`, {
-                skillLevel: newSkillLevel,
-            },
-            {
-                headers: authHeader(),
-            },
-        );
+                    skillLevel: newSkillLevel,
+                },
+                {
+                    headers: authHeader(),
+                },
+            );
+            if (user) {
+                user.skillLevel = newSkillLevel as string;
+            }
+            localStorage.setItem('user', JSON.stringify(user));
+            toast.success('Skill level updated successfully!');
         } catch (error) {
             console.error('Error updating skill level:', error);
+            toast.error('Failed to update skill level');
         }
     }
 
@@ -59,6 +70,7 @@ export default function EditProfile() {
                     Change Password
                 </a>
             </div>
+            <ToastContainer />
         </div>
     )
 }
