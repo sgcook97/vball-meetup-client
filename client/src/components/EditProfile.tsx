@@ -1,27 +1,23 @@
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
 import getUser from '../services/get-user';
-import authHeader from '../services/auth-header';
 import { skillLevels } from '../lib/data';
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../services/AuthContext';
 import ChangePassword from './ChangePassword';
+import useApi from '../config/axiosConfig';
 
 export default function EditProfile() {
     const [newSkillLevel, setNewSkillLevel] = useState<string | undefined>('');
-    const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
     const authContext = useContext(AuthContext);
     let user = authContext?.currentUser;
+    const api = useApi();
 
     const handleSubmit = async (e: React.FormEvent ) => {
         e.preventDefault();
         try {
             const userId = getUser();
-            await axios.put(`${BLOCKPARTY_API_URL}/user/${userId}/skill-level`, {
+            await api.put(`/user/${userId}/skill-level`, {
                     skillLevel: newSkillLevel,
-                },
-                {
-                    headers: authHeader(),
                 },
             );
             if (user) {

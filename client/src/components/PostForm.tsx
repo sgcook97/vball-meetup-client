@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios'; // Import Axios
-import authHeader from '../services/auth-header';
 import getUser from '../services/get-user';
-
-const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
+import useApi from '../config/axiosConfig';
 
 export default function PostForm() {
   const [title, setTitle] = useState('');
@@ -11,10 +8,12 @@ export default function PostForm() {
   const [content, setContent] = useState('');
   const [skillLevel, setSkillLevel] = useState('');
 
+  const api = useApi();
+
   const handlePost = async () => {
     try {
       const poster = getUser()
-      const response = await axios.post(`${BLOCKPARTY_API_URL}/post/create-post`, 
+      const response = await api.post('/post/create-post', 
         {
           poster, 
           title,
@@ -22,9 +21,6 @@ export default function PostForm() {
           content,
           skillLevel
         },
-        {
-          headers: authHeader(),
-        }
       );
 
       console.log('Post created:', response.data);

@@ -1,13 +1,12 @@
-import axios from 'axios';
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { toast } from 'react-toastify';
-import authHeader from '../services/auth-header';
 import getUser from '../services/get-user';
-
-const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
+import useApi from '../config/axiosConfig';
 
 export default function ChangePassword() {
+    const api = useApi();
+
     const formik = useFormik({
         initialValues: {
             newPassword: "",
@@ -21,15 +20,12 @@ export default function ChangePassword() {
         }),
         onSubmit: (values) => {
             const { newPassword } = values;
-            axios
-                .post(`${BLOCKPARTY_API_URL}/user/change-password`, 
+            api
+                .post('/user/change-password', 
                     { 
                         newPassword,
                         userId: getUser(),
                     },
-                    {
-                        headers: authHeader(),
-                    }
                 )
                 .then((response) => {
                     toast.success(response.data.message);

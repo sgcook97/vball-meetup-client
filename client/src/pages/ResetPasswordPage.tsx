@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-
-const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
+import useApi from "../config/axiosConfig";
 
 export default function ResetPasswordPage() {
+    const api = useApi();
+
     const formik = useFormik({
         initialValues: {
             newPassword: "",
@@ -21,8 +21,8 @@ export default function ResetPasswordPage() {
             const { newPassword } = values;
             const token = window.location.pathname.split("/").pop();
 
-            axios
-                .post(`${BLOCKPARTY_API_URL}/user/reset-password/${token}`, { newPassword })
+            api
+                .post(`/user/reset-password/${token}`, { newPassword })
                 .then((response) => {
                     toast.success(response.data.message);
                     setTimeout(() => {

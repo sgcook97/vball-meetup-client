@@ -1,7 +1,7 @@
 // Register.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import useApi from '../config/axiosConfig';
 
 export default function Register() {
     const [username, setUsername] = useState('');
@@ -10,16 +10,15 @@ export default function Register() {
     const [skillLevel, setSkillLevel] = useState('');
     const navigate = useNavigate();
 
-    const BLOCKPARTY_API_URL: string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
+    const api = useApi();
 
     const handleRegister = async () => {
         try {
-            await axios.post(`${BLOCKPARTY_API_URL}/auth/register`, {
+            await api.post('/auth/register', {
                 username,
                 email,
                 password,
                 skillLevel,
-                // Additional fields if needed
             });
             navigate('/login');
         } catch (error) {

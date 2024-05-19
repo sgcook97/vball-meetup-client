@@ -2,10 +2,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-
-const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
+import useApi from "../config/axiosConfig";
 
 const ForgetPassword = () => {
+    const api = useApi();
 
     const formik = useFormik({
         initialValues: {
@@ -15,7 +15,7 @@ const ForgetPassword = () => {
             email: Yup.string().email("Invalid email address").required("Required"),
         }),
         onSubmit: (values) => {
-            axios.post(`${BLOCKPARTY_API_URL}/user/forgot-password`, values)
+            api.post('/user/forgot-password', values)
                 .then(() => {
                     toast.success("Email sent successfully");
                 })

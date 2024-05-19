@@ -8,7 +8,8 @@ interface User {
     email: string,
     skillLevel: string,
     favoritePlaces: Array<string>,
-    token: string,
+    accessToken: string,
+    refreshToken: string,
 }
   
 // Define the shape of your authentication context
@@ -16,6 +17,7 @@ interface AuthContextType {
     currentUser: User | null;
     login: (inputs: any) => Promise<void>;
     logout: () => Promise<void>;
+    refreshToken: () => Promise<void>;
 }
   
 // Create the authentication context
@@ -59,8 +61,31 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
             console.error("Logout error:", error);
         }
     }, []);
+
+    const refreshToken = useCallback(async () => {
+        try {
+            const storedUser = localStorage.getItem("user");
+            if (!storedUser) {
+                throw new Error("No user available");
+            }
+
+            const user = JSON.parse(storedUser) as User;
+            const res = await axios.post(`${BLOCKPARTY_API_URL}/auth/refresh-token`, { refreshToken: user.refreshToken });
+            if (res.status === 200) {
+                const { accessToken: newAccessToken } = res.data;
+                const updatedUser = { ...user, accessToken: newAccessToken };
+                setCurrentUser(updatedUser);
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+            } else {
+                throw new Error("Failed to refresh token");
+            }
+        } catch (error) {
+            console.error("Refresh token error:", error);
+            logout();
+        }
+    }, [logout]);
   
-    // Update local storage when currentUser changes
+    
     useEffect(() => {
         if (currentUser) {
             localStorage.setItem("user", JSON.stringify(currentUser));
@@ -70,7 +95,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
     }, [currentUser]);
   
     // Memoize the authentication context value
-    const authContextValue = useMemo<AuthContextType>(() => ({ currentUser, login, logout }), [
+    const authContextValue = useMemo<AuthContextType>(() => ({ currentUser, login, logout, refreshToken }), [
         currentUser,
         login,
         logout,
