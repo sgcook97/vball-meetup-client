@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../services/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -14,10 +15,10 @@ export default function Login() {
             await login({
                 email,
                 password
-            })
-            navigate('/');
+            });
+            navigate('/')
         } catch (error) {
-            console.error('Error logging in:', error);
+            toast.error('Invalid email or password');
         }
     };
 
@@ -63,6 +64,7 @@ export default function Login() {
             <div>
                 <a className='text-onBackground hover:text-secondary transition underline' href='/register'>Don't have an account?</a>
             </div>
+            <ToastContainer />
         </div>
     );
 };

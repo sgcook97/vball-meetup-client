@@ -39,9 +39,14 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
     const login = useCallback(async (inputs: any) => {
         try {
             const res = await axios.post(`${BLOCKPARTY_API_URL}/auth/login`, inputs);
-            setCurrentUser(res.data);
+            if (res.status === 200) {
+                setCurrentUser(res.data);
+            } else {
+                throw new Error(res.data.message || 'Login failed');
+            }
         } catch (error) {
             console.error("Login error:", error);
+            throw error;
         }
     }, []);
   
