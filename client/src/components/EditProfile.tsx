@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Select, Option } from '@material-tailwind/react';
 import axios from 'axios';
 import getUser from '../services/get-user';
 import authHeader from '../services/auth-header';
 import { skillLevels } from '../lib/data';
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../services/AuthContext';
+import ChangePassword from './ChangePassword';
 
 export default function EditProfile() {
     const [newSkillLevel, setNewSkillLevel] = useState<string | undefined>('');
@@ -39,20 +39,19 @@ export default function EditProfile() {
         <div className='flex flex-col items-center justify-center gap-y-8 w-full h-full'>
             <h2 className='font-semibold text-[28px]'>Edit Profile</h2>
             <label className='flex justify-between w-[80%] gap-4'>
-                Change Skill Level:
+                <p className='text-lg font-semibold'>Change Skill Level:</p> 
                 <form onSubmit={handleSubmit} className='flex flex-col gap-2 items-end'>
-                    <Select label='Select Skill Level'
-                        className='text-onSurface'
+                    <select
+                        className='text-onSurface focus:outline-none 
+                        bg-onSurface/10 border-2 border-onSurface/30 
+                        rounded-md py-1 px-2 focus:border-secondary'
                         value={newSkillLevel}
-                        error={newSkillLevel === '' ? true : false}
-                        onChange={(e) => setNewSkillLevel(e)}
-                        placeholder={undefined}
-                        onPointerEnterCapture=''
-                        onPointerLeaveCapture=''                   >
+                        onChange={e => setNewSkillLevel(e.target.value)}
+                    >
                         {skillLevels.map((level, index) => (
-                            <Option key={index} value={level}>{level}</Option>
+                            <option key={index} value={level}>{level}</option>
                         ))}
-                    </Select>
+                    </select>
                     <button className={`bg-onSurface/40 w-[5rem] rounded-md 
                     py-2 px-3 ml-4 transition ${newSkillLevel === '' ? '' : 'hover:bg-primary'}`}
                         type='submit'
@@ -62,14 +61,7 @@ export default function EditProfile() {
                     </button>
                 </form>
             </label>
-            <div className='flex justify-between'>
-                <a href="/forgot-password"
-                    className='bg-onSurface/40 rounded-md 
-                    py-2 px-3 hover:bg-primary transition'
-                >
-                    Change Password
-                </a>
-            </div>
+            <ChangePassword />
             <ToastContainer />
         </div>
     )
