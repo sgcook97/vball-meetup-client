@@ -74,8 +74,8 @@ const ForgetPassword = () => {
                         />
                         <button
                             type="submit"
-                            className="bg-onSurface/40 text-onSurface mt-5 
-                                p-2 rounded-md hover:scale-[1.05]"
+                            className="bg-onSurface/40 text-onSurface py-2 px-3 ml-4 
+                                transition rounded-md hover:bg-primary"
                         >
                             Send Email
                         </button>

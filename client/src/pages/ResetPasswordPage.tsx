@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const BLOCKPARTY_API_URL : string = import.meta.env.VITE_BLOCKPARTY_API_URL as string;
 
-export default function ResetPassword() {
+export default function ResetPasswordPage() {
     const formik = useFormik({
         initialValues: {
             newPassword: "",
@@ -107,8 +107,8 @@ export default function ResetPassword() {
                         />
                         <button
                             type="submit"
-                            className="bg-onSurface/40 text-onSurface mt-5 p-2
-                                rounded-md hover:scale-[1.05]"
+                            className="bg-onSurface/40 text-onSurface py-2 px-3 ml-4 
+                                transition rounded-md hover:bg-primary"
                         >
                             Reset Password
                         </button>
