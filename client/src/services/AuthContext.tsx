@@ -5,6 +5,9 @@ import { createContext, useEffect, useState, useCallback, useMemo, ReactNode } f
 interface User {
     userId: string,
     username: string,
+    email: string,
+    skillLevel: string,
+    favoritePlaces: Array<string>,
     token: string,
 }
   
