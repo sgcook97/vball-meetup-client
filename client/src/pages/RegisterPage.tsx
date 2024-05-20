@@ -34,7 +34,7 @@ export default function Register() {
     });
 
     return (
-        <div className='text-onBackground relative pt-[3.5rem] 
+        <div className='text-onBackground relative pt-[5rem] 
             flex flex-col justify-center items-center h-screen
             w-screen'
         >

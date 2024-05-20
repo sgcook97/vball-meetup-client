@@ -6,7 +6,7 @@ export default function ProfileCard() {
     const user = authContext?.currentUser;
 
     return (
-        <div className='flex flex-col justify-center min-w-[15rem] w-[60%] h-full'>
+        <div className='flex flex-col justify-center min-w-[18rem] w-[80%] h-full'>
             <h2 className='text-center font-semibold text-[28px] mb-10'>
                 Your Profile
             </h2>
@@ -39,8 +39,8 @@ export default function ProfileCard() {
                 </div> 
             </div>
             <div className='mt-4 flex justify-center items-center'>
-                <a className='bg-onSurface/40 text-center rounded-md
-                    px-3 py-1' 
+                <a className='bg-onSurface/30 text-center rounded-md
+                    px-3 py-1 hover:bg-primary transition hover:text-onPrimary' 
                     href="/edit-profile"
                 >
                     Edit Profile
