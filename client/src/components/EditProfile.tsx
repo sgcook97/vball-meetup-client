@@ -44,6 +44,7 @@ export default function EditProfile() {
                         value={newSkillLevel}
                         onChange={e => setNewSkillLevel(e.target.value)}
                     >
+                        <option value="" disabled>Select Skill Level</option>
                         {skillLevels.map((level, index) => (
                             <option key={index} value={level}>{level}</option>
                         ))}

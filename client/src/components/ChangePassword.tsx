@@ -41,7 +41,7 @@ export default function ChangePassword() {
     });
 
     return (
-        <div className="flex flex-col justify-center items-center w-[60%]">
+        <div className="flex flex-col justify-center items-center w-full">
             <h1 className="text-lg text-onSurface font-semibold">Change Password</h1>
             <form onSubmit={formik.handleSubmit} className="mt-5 flex flex-col justify-center items-center">
                 <div className='flex flex-col'>

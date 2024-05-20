@@ -6,7 +6,7 @@ export default function ProfileCard() {
     const user = authContext?.currentUser;
 
     return (
-        <div className='flex flex-col justify-center w-[60%] h-full'>
+        <div className='flex flex-col justify-center min-w-[15rem] w-[60%] h-full'>
             <h2 className='text-center font-semibold text-[28px] mb-10'>
                 Your Profile
             </h2>
