@@ -5,7 +5,10 @@ export default function getUser() {
         user = JSON.parse(userStr);
   
     if (user && user.userId) {
-        return user.userId;
+        return { 
+            userId: user.userId,
+            username: user.username,
+        };
     } else {
         return null;
     }

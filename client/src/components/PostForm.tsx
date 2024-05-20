@@ -8,6 +8,7 @@ import { skillLevels } from '../lib/data';
 export default function PostForm() {
 
   const api = useApi();
+  const user = getUser();
 
   const formik = useFormik({
     initialValues: {
@@ -15,7 +16,10 @@ export default function PostForm() {
       location: "",
       skillLevel: "Any",
       content: "",
-      poster: getUser(),
+      poster: {
+        posterId: user?.userId,
+        username: user?.username,
+      }
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Title is required"),
@@ -166,7 +170,8 @@ export default function PostForm() {
             value={formik.values.content}
           ></textarea>
         </div>
-        <input type="hidden" name="poster" value={formik.values.poster} />
+        <input type="hidden" name="posterId" value={formik.values.poster.posterId} />
+        <input type="hidden" name="posterUsername" value={formik.values.poster.username} />
         <button 
           className='bg-primary text-onPrimary w-[5rem] h-[2.2rem] rounded-md hover:bg-secondary hover:text-onSecondary transition duration-200'
           type='submit'
