@@ -31,6 +31,7 @@ export default function ProfilePage() {
       >
         <ProfileCard />
       </div>
+      <h1 className='my-3 text-[28px] font-semibold text-onBackground'>Your Posts</h1>
       <div className='flex flex-col w-full items-center'>
         {userPosts.map((post, index) => (
           <React.Fragment key={index}>
