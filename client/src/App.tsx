@@ -12,6 +12,7 @@ import ProtectedRoute from "./services/ProtectedRoute";
 import EditProfilePage from "./pages/EditProfilePage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import Footer from "./components/Footer";
 
 export default function App() {
 
@@ -52,6 +53,7 @@ export default function App() {
         {/* Page not found */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </Router>
   )
 }

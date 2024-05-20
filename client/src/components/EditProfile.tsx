@@ -49,8 +49,8 @@ export default function EditProfile() {
                             <option key={index} value={level}>{level}</option>
                         ))}
                     </select>
-                    <button className={`bg-onSurface/40 w-[5rem] rounded-md 
-                    py-2 px-3 ml-4 transition ${newSkillLevel === '' ? '' : 'hover:bg-primary'}`}
+                    <button className={`bg-onSurface/30 text-onSurface w-[5rem] rounded-md 
+                    py-2 px-3 ml-4 transition ${newSkillLevel === '' ? 'opacity-50' : 'hover:bg-primary hover:text-onPrimary'}`}
                         type='submit'
                         disabled={newSkillLevel === '' ? true : false}
                     >

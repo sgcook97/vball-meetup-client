@@ -20,7 +20,7 @@ export default function Header({ currentTheme, toggleTheme } : HeaderProps) {
     return (
         <div className='text-primary flex justify-center items-center w-full
         h-[3.5rem] px-5 py-3 fixed top-0 z-50 bg-background border-b border-b-onBackground/10'>
-            <h2 className='absolute left-4 text-onBackground text-[2rem]'><a href="/">blockparty</a></h2>
+            <h2 className='absolute left-4 text-onBackground text-[2rem]'><a className="text-primary" href="/">block</a><a className="text-secondary" href="/">party</a></h2>
             <nav className='hidden md:flex'>
                 <ul className='flex gap-10 justify-center items-center text-onBackground'>
                     <li className='flex justify-center items-center transition rounded-lg

@@ -28,8 +28,8 @@ export default function Login() {
     };
 
     return (
-        <div className='text-onBackground relative pt-[3.5rem] 
-        flex flex-col justify-center items-center h-screen w-screen mt-[3rem] md:mt-0'>
+        <div className='text-onBackground 
+        flex flex-col justify-center items-center h-screen w-screen pt-[5rem]'>
             <h2>Login</h2>
             <form action="" className='m-2 flex flex-col items-center
                 justify-center max-w-[20rem] min-w-[15rem] w-[80%] gap-2'

@@ -108,8 +108,10 @@ export default function ChangePassword() {
                 </div>
                 <button
                     type="submit"
-                    className="bg-onSurface/40 text-onSurface py-2 px-3 mt-4
-                        transition rounded-md hover:bg-primary"
+                    disabled={formik.errors.confirmPassword || !formik.values.confirmPassword ? true : false}
+                    className={`bg-onSurface/30 text-onSurface py-2 px-3 mt-4
+                        transition rounded-md ${formik.errors.confirmPassword || !formik.values.confirmPassword ? 'opacity-50' 
+                        : 'hover:bg-primary hover:text-onPrimary'}`}
                 >
                     Change Password
                 </button>
