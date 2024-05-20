@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CiMenuBurger } from "react-icons/ci";
 
 export default function Dropdown() {
     const [isOpen, setIsOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement | null>(null);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -12,12 +13,25 @@ export default function Dropdown() {
         setIsOpen(false);
     };
 
+    useEffect(() => {
+        let handler = (e: MouseEvent) => {
+          if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+              setIsOpen(false)
+          }
+        }
+        document.addEventListener('mousedown', handler);
+      
+        return () => {
+          document.removeEventListener('mousedown', handler);
+        }
+      })
+
     return (
-        <div>
+        <div ref={menuRef}>
             <CiMenuBurger 
                 size={25}
                 className='text-onBackground hover:text-onBackground/80
-                    transition duration-100 hover:ease-in' 
+                    transition duration-100 hover:ease-in hover:cursor-pointer' 
                 onClick={toggleMenu}
             />
             { isOpen && (
