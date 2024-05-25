@@ -95,7 +95,7 @@ export default function Chat({ currentUser, selectedUser } : ChatProps) {
                             placeholder='Type a message...'
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
-                            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+                            onKeyDown={(e) => (e.key === 'Enter' && input !== '') && sendMessage()}
                         />
                         <button 
                             className='bg-secondary border-2 border-secondary text-onSecondary px-2 py-1 rounded-br-lg w-[4rem]'
