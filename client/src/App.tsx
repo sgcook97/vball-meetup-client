@@ -14,12 +14,15 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import Footer from "./components/Footer";
 import ChatPage from "./pages/ChatPage";
+import { useSocket } from "./services/socket-config";
 
 export default function App() {
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
   });
+
+  const socket = useSocket();
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
