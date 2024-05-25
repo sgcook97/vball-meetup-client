@@ -9,7 +9,7 @@ export default function HomePage() {
           flex flex-col justify-center items-center"
         >
           <WeatherSkeleton />
-        </div>
+        </div> 
         <div className='h-[30rem]'>
           <p>another div</p>
         </div>

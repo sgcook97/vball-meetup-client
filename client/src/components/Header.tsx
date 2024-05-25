@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { IoMdHome } from "react-icons/io";
+import { IoMdHome, IoMdMail } from "react-icons/io";
 import { FaUserGroup } from "react-icons/fa6";
 import { FaPlusSquare } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
@@ -22,7 +22,7 @@ export default function Header({ currentTheme, toggleTheme } : HeaderProps) {
         h-[3.5rem] px-5 py-3 fixed top-0 z-50 bg-background border-b border-b-onBackground/10'>
             <h2 className='absolute left-4 text-onBackground text-[2rem]'><a className="text-primary" href="/">block</a><a className="text-secondary" href="/">party</a></h2>
             <nav className='hidden md:flex'>
-                <ul className='flex gap-10 justify-center items-center text-onBackground'>
+                <ul className='flex gap-6 justify-center items-center text-onBackground'>
                     <li className='flex justify-center items-center transition rounded-lg
                     hover:opacity-100 hover:bg-onBackground/10 h-[3rem] w-[4rem]'>
                         <a href="/"><IoMdHome size={28}/></a>
@@ -34,6 +34,10 @@ export default function Header({ currentTheme, toggleTheme } : HeaderProps) {
                     <li className='flex justify-center items-center transition rounded-lg
                     hover:opacity-100 hover:bg-onBackground/10 h-[3rem] w-[4rem]'>
                         <a href="/create-post"><FaPlusSquare size={28}/></a>
+                    </li>
+                    <li className='flex justify-center items-center transition rounded-lg
+                    hover:opacity-100 hover:bg-onBackground/10 h-[3rem] w-[4rem]'>
+                        <a href="/chat"><IoMdMail size={28}/></a>
                     </li>
                     <li className='flex justify-center items-center transition rounded-lg
                     hover:opacity-100 hover:bg-onBackground/10 h-[3rem] w-[4rem]'>

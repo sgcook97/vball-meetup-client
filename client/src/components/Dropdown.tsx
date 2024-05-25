@@ -78,6 +78,16 @@ export default function Dropdown() {
                                 Profile
                             </a>
                         </li>
+                        <li>
+                            <a
+                                href="/chat" 
+                                onClick={closeMenu}
+                                className='hover:text-onBackground/80 text-onBackground  
+                                transition duration-200 hover:ease-in pl-1'
+                            >
+                                Chat
+                            </a>
+                        </li>
                     </ul>
                 </div>
             )}

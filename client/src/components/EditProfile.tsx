@@ -15,7 +15,7 @@ export default function EditProfile() {
     const handleSubmit = async (e: React.FormEvent ) => {
         e.preventDefault();
         try {
-            const userId = getUser();
+            const userId = getUser()?.userId;
             await api.put(`/user/${userId}/skill-level`, {
                     skillLevel: newSkillLevel,
                 },
