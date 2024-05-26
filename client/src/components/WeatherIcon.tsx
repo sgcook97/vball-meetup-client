@@ -50,6 +50,9 @@ export default function WeatherIcon({ code, daytime, size }: WeatherIconProps) {
         case 'heavySnow':
             return <WiSnow size={size} />;
         default:
-            return <WiDaySunny size={size} />;
+            if (daytime) {
+                return <WiDaySunny size={size} />;
+            }
+            return <WiNightClear size={size} />;
     }  
 }

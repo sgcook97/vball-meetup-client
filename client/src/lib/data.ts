@@ -107,16 +107,16 @@ export const weatherCodes = {
         condition: 'Heavy Snow Showers',
         icon: 'heavySnow',
     },
-    95: {
-        condition: 'Thunderstorm',
-        icon: 'cloudy',
-    },
-    96: {
-        condition: 'Thunderstorm Light Hail',
-        icon: 'cloudy',
-    },
-    99: {
-        condition: 'Thunderstorm Heavy Hail',
-        icon: 'cloudy',
-    },
+    // 95: {
+    //     condition: 'Thunderstorm',
+    //     icon: 'cloudy',
+    // },
+    // 96: {
+    //     condition: 'Thunderstorm Light Hail',
+    //     icon: 'cloudy',
+    // },
+    // 99: {
+    //     condition: 'Thunderstorm Heavy Hail',
+    //     icon: 'cloudy',
+    // },
 } as const;

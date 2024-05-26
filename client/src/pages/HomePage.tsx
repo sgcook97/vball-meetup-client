@@ -1,7 +1,6 @@
-// import WeatherDisplay from "../components/WeatherDisplay";
+import WeatherDisplay from "../components/WeatherDisplay";
 import { useContext } from "react";
 import HomePostForm from "../components/HomePostForm";
-import WeatherSkeleton from "../components/WeatherSkeleton";
 import { AuthContext } from "../services/AuthContext";
 import HomePostDisplay from "../components/HomePostDisplay";
 
@@ -15,7 +14,7 @@ export default function HomePage() {
         <div className="max-w-[40rem] min-w-[20rem] w-[60%] 
           flex flex-col justify-center items-center"
         >
-          <WeatherSkeleton />
+          <WeatherDisplay />
         </div> 
         {currentUser && 
           <div className='mt-8 max-w-[40rem] min-w-[20rem] w-[60%]
