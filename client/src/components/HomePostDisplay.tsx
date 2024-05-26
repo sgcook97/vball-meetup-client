@@ -3,8 +3,13 @@ import useApi from '../config/axiosConfig';
 import PostCard from './PostCard';
 import ChatModal from './ChatModal';
 
+interface SelectedUser {
+    userId: string;
+    username: string;
+}
+
 export default function HomePostDisplay() {
-    const [selectedUser, setSelectedUser] = useState({} as any);
+    const [selectedUser, setSelectedUser] = useState<SelectedUser | null>(null);
     const [recentPosts, setRecentPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const api = useApi();
@@ -37,14 +42,14 @@ export default function HomePostDisplay() {
 
     useEffect(() => {
         let handler = (e: MouseEvent) => {
-          if (chatModalRef.current && !chatModalRef.current.contains(e.target as Node)) {
-              setShowChatModal(false);
-          }
+            if (chatModalRef.current && !chatModalRef.current.contains(e.target as Node)) {
+                setShowChatModal(false);
+            }
         }
         document.addEventListener('mousedown', handler);
       
         return () => {
-          document.removeEventListener('mousedown', handler);
+            document.removeEventListener('mousedown', handler);
         }
     })
 
@@ -58,7 +63,7 @@ export default function HomePostDisplay() {
                     recentPosts.map((post, index) => (
                         <React.Fragment key={index}>
                             <PostCard profilePosts={false} 
-                                post={post} 
+                                post={post}
                                 setShowChatModal={setShowChatModal} 
                                 setSelectedUser={setSelectedUser}
                             />
@@ -72,7 +77,7 @@ export default function HomePostDisplay() {
             >
                 See more
             </a>
-            {showChatModal && (
+            {showChatModal && selectedUser && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 w-full">
                     <div className="absolute inset-0 bg-background opacity-75"></div>
                     <div className="relative rounded-lg bg-surface max-w-[30rem] min-w-[20rem] w-full">

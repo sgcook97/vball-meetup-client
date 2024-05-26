@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import getUser from "../services/get-user";
+import { useContext, useEffect, useRef, useState } from "react";
 import { formatTimeSincePosted } from "../services/time-diff";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../services/AuthContext";
 
 interface PostPropsType {
     post: {
@@ -19,12 +19,11 @@ interface PostPropsType {
     };
     profilePosts: boolean;
     onDelete?: (postId: string, posterId: string, userId: string) => void;
-    currentUserId?: string;
     setShowChatModal?: (show: boolean) => void;
     setSelectedUser?: (user: any) => void;
 }
 
-export default function PostCard({ post, profilePosts, onDelete, currentUserId, setShowChatModal, setSelectedUser } : PostPropsType) {
+export default function PostCard({ post, profilePosts, onDelete, setShowChatModal, setSelectedUser } : PostPropsType) {
     const [showDeleteMenu, setShowDeleteMenu] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const [showUserMenu, setShowUserMenu] = useState(false);
@@ -35,7 +34,7 @@ export default function PostCard({ post, profilePosts, onDelete, currentUserId, 
     const navigator = useNavigate();
 
     const timeSincePost = formatTimeSincePosted(new Date(post.createdAt));
-    const userId = getUser()?.userId;
+    const userId = useContext(AuthContext)?.currentUser?.userId;
 
     useEffect(() => {
         let handler = (e: MouseEvent) => {
@@ -64,7 +63,7 @@ export default function PostCard({ post, profilePosts, onDelete, currentUserId, 
     })
 
     const handleMessage = () => {
-        if (currentUserId !== '' && setShowChatModal) {
+        if (userId && setShowChatModal) {
             setShowChatModal(true);
             setSelectedUser && setSelectedUser({ 
                 userId: post.poster.posterId, 
@@ -92,9 +91,10 @@ export default function PostCard({ post, profilePosts, onDelete, currentUserId, 
                 <h2 className="text-primary font-semibold text-xl">{post.title}</h2>
                 <div className="relative"
                     ref={userMenuRef}
-                    onClick={() => setShowUserMenu(!showUserMenu)} 
+                    onClick={(post.poster.posterId !== userId) ? () => setShowUserMenu(!showUserMenu) : undefined} 
                 >
-                    <p className="text-sm hover:cursor-pointer text-secondary font-semibold">
+                    <p className={`text-sm ${post.poster.posterId !== userId ? 'hover:cursor-pointer' : 'hover:cursor-default'} 
+                        text-secondary font-semibold`}>
                         {post.poster.username}
                     </p>
                     {showUserMenu &&
