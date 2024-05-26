@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useApi from "../config/axiosConfig";
-import React from "react";
 import PostCard from "../components/PostCard";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 
@@ -56,9 +55,9 @@ export default function FindGroupPage() {
           <div className="loader">Loading...</div> // Loading indicator
         ) : (
           recentPosts.map((post, index) => (
-            <React.Fragment key={index}>
+            <div className="min-w-[320px] w-[60%] max-w-[30rem]" key={index}>
               <PostCard profilePosts={false} post={post}/>
-            </React.Fragment>
+            </div>
           ))
         )}
       </div>

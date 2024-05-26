@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import ProfileCard from '../components/ProfileCard'
 import useApi from '../config/axiosConfig';
 import PostCard from '../components/PostCard';
-import React from 'react';
 import getUser from '../services/get-user';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
@@ -91,9 +90,9 @@ export default function ProfilePage() {
               <div className="loader">Loading...</div> // Loading indicator
             ) : (
               userPosts.map((post, index) => (
-                <React.Fragment key={index}>
+                <div className='min-w-[320px] w-[60%] max-w-[30rem]' key={index}>
                   <PostCard profilePosts={true} post={post} onDelete={handleDeletePost} />
-                </React.Fragment>
+                </div>
               ))
             )}
           </div>

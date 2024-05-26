@@ -13,6 +13,7 @@ import EditProfilePage from "./pages/EditProfilePage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import Footer from "./components/Footer";
+import ChatPage from "./pages/ChatPage";
 
 export default function App() {
 
@@ -22,7 +23,6 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
-    
     const htmlElement = document.querySelector('html');
     if (htmlElement) {
       htmlElement.setAttribute('data-color-theme', theme);
@@ -49,6 +49,7 @@ export default function App() {
         <Route path='/create-post' element={<ProtectedRoute><CreatePostPage /></ProtectedRoute>} />
         <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
         <Route path='/edit-profile' element={<ProtectedRoute><EditProfilePage /></ProtectedRoute>} />
+        <Route path='/chat' element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
 
         {/* Page not found */}
         <Route path="*" element={<ErrorPage />} />

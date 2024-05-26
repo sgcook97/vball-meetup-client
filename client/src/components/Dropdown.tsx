@@ -24,7 +24,7 @@ export default function Dropdown() {
         return () => {
           document.removeEventListener('mousedown', handler);
         }
-      })
+    })
 
     return (
         <div ref={menuRef}>
@@ -76,6 +76,16 @@ export default function Dropdown() {
                                 transition duration-200 hover:ease-in pl-1'
                             >
                                 Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="/chat" 
+                                onClick={closeMenu}
+                                className='hover:text-onBackground/80 text-onBackground  
+                                transition duration-200 hover:ease-in pl-1'
+                            >
+                                Chat
                             </a>
                         </li>
                     </ul>
