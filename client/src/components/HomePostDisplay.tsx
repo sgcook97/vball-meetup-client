@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useApi from '../config/axiosConfig';
 import PostCard from './PostCard';
+import ChatModal from './ChatModal';
 
 export default function HomePostDisplay() {
+    const [selectedUser, setSelectedUser] = useState({} as any);
     const [recentPosts, setRecentPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const api = useApi();
+
+    const [showChatModal, setShowChatModal] = useState(false);
+
+    const chatModalRef = useRef<HTMLDivElement | null>(null);
 
     const fetchRecentPosts = async (page: number) => {
         setLoading(true);
@@ -29,18 +35,35 @@ export default function HomePostDisplay() {
         fetchRecentPosts(1);
     }, [api]);
 
+    useEffect(() => {
+        let handler = (e: MouseEvent) => {
+          if (chatModalRef.current && !chatModalRef.current.contains(e.target as Node)) {
+              setShowChatModal(false);
+          }
+        }
+        document.addEventListener('mousedown', handler);
+      
+        return () => {
+          document.removeEventListener('mousedown', handler);
+        }
+    })
+
     return (
         <div className='text-onBackground w-full
         flex flex-col justify-center items-center'>
             <div className={`${loading ? 'loading' : ''} flex flex-col w-full items-center`}>
                 {loading ? (
-                <div className="loader">Loading...</div> // Loading indicator
+                    <div className="loader">Loading...</div> // Loading indicator
                 ) : (
-                recentPosts.map((post, index) => (
-                    <React.Fragment key={index}>
-                    <PostCard profilePosts={false} post={post}/>
-                    </React.Fragment>
-                ))
+                    recentPosts.map((post, index) => (
+                        <React.Fragment key={index}>
+                            <PostCard profilePosts={false} 
+                                post={post} 
+                                setShowChatModal={setShowChatModal} 
+                                setSelectedUser={setSelectedUser}
+                            />
+                        </React.Fragment>
+                    ))
                 )}
             </div>
             <a href="/find-group" 
@@ -49,6 +72,17 @@ export default function HomePostDisplay() {
             >
                 See more
             </a>
+            {showChatModal && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 w-full">
+                    <div className="absolute inset-0 bg-background opacity-75"></div>
+                    <div className="relative rounded-lg bg-surface max-w-[30rem] min-w-[20rem] w-full">
+                        <div ref={chatModalRef} 
+                            className="">
+                            <ChatModal selectedUser={selectedUser} />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

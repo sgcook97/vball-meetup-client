@@ -57,7 +57,7 @@ export default function OnlineUsers({ onUserSelect, selectedUser, currentUser, h
             rounded-l-lg border-2 border-r-0 border-onBackground/10 overflow-hidden px-2 py-1'
         >
             <div className='overflow-y-auto hide-scrollbar'>
-                <div className=''>
+                <div>
                     <h2 className="font-semibold text-xl mb-1">Online Users</h2>
                     {/* check if anyone else is online */}
                     {onlineUsers.length === 1 ?

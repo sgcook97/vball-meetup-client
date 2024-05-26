@@ -53,7 +53,6 @@ export default function Chat({ currentUser, selectedUser } : ChatProps) {
         // retrieve messages between current user and selected user
         const fetchMessages = async () => {
             try {
-                console.log(currentUser, selectedUser);
                 const response = await api.get(`/message/${currentUser}/${selectedUser}`);
                 const data: Message[] = await response.data;
                 setMessages(data);
