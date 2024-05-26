@@ -52,7 +52,7 @@ export default function PostCard({ post, profilePosts, onDelete } : PostPropsTyp
     };
 
     return (
-        <div className="min-w-[320px] w-[60%] max-w-[30rem] my-[1rem] bg-onSurface/5 text-onSurface py-[0.25rem] 
+        <div className="w-full my-[1rem] bg-onSurface/5 text-onSurface py-[0.25rem] 
         px-[0.5rem] rounded-md border-2 border-onBackground/10 hover:border-secondary 
         transition hover:scale-[1.05]" >
             <div className="flex justify-between items-center">

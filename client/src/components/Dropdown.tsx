@@ -24,7 +24,7 @@ export default function Dropdown() {
         return () => {
           document.removeEventListener('mousedown', handler);
         }
-      })
+    })
 
     return (
         <div ref={menuRef}>

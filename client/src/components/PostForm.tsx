@@ -5,7 +5,12 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import { skillLevels } from '../lib/data';
 
-export default function PostForm() {
+interface PostFormProps {
+  handleClickForm?: () => void;
+}
+
+
+export default function PostForm( { handleClickForm } : PostFormProps) {
 
   const api = useApi();
   const user = getUser();
@@ -34,7 +39,9 @@ export default function PostForm() {
 
       try {
         await api.post('/post/create-post', values);
-        toast.success('Successfully created post!');
+        toast.success('Successfully created post!', {
+          onClose: handleClickForm
+        });
         resetForm();
       } catch (error) {
         toast.error('Error creating post.');
@@ -43,7 +50,7 @@ export default function PostForm() {
   });
 
   return (
-    <div className='m-2 flex flex-col items-center justify-center max-w-[25rem] min-w-[15rem] w-[80%]'>
+    <div className='flex flex-col items-center justify-center max-w-[25rem] min-w-[15rem] w-[80%]'>
       <form onSubmit={formik.handleSubmit} className='flex flex-col items-center justify-center gap-2 w-full'>
         <div className='flex flex-col w-full'>
           <label
