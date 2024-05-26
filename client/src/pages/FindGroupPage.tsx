@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useApi from "../config/axiosConfig";
 import PostCard from "../components/PostCard";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
+import ChatModal from "../components/ChatModal";
+
+interface SelectedUser {
+  userId: string;
+  username: string;
+}
 
 export default function FindGroupPage() {
   const [recentPosts, setRecentPosts] = useState([]);
@@ -9,6 +15,10 @@ export default function FindGroupPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const api = useApi();
+
+  const [selectedUser, setSelectedUser] = useState<SelectedUser | null>(null);
+  const [showChatModal, setShowChatModal] = useState(false);
+  const chatModalRef = useRef<HTMLDivElement | null>(null);
 
   const fetchRecentPosts = async (page: number) => {
     setLoading(true); // Set loading to true before fetching
@@ -33,6 +43,19 @@ export default function FindGroupPage() {
     fetchRecentPosts(currentPage);
   }, [currentPage, api]);
 
+  useEffect(() => {
+    let handler = (e: MouseEvent) => {
+      if (chatModalRef.current && !chatModalRef.current.contains(e.target as Node)) {
+        setShowChatModal(false);
+      }
+    }
+    document.addEventListener('mousedown', handler);
+  
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    }
+  })
+
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -56,7 +79,10 @@ export default function FindGroupPage() {
         ) : (
           recentPosts.map((post, index) => (
             <div className="min-w-[320px] w-[60%] max-w-[30rem]" key={index}>
-              <PostCard profilePosts={false} post={post}/>
+              <PostCard profilePosts={false} post={post}
+                setShowChatModal={setShowChatModal} 
+                setSelectedUser={setSelectedUser}
+              />
             </div>
           ))
         )}
@@ -80,6 +106,16 @@ export default function FindGroupPage() {
           <IoIosArrowRoundForward size={26}/>
         </button>
       </div>
+      {showChatModal && selectedUser && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 w-full">
+          <div className="absolute inset-0 bg-background opacity-75"></div>
+          <div className="relative rounded-lg bg-surface max-w-[30rem] min-w-[20rem] w-full">
+            <div ref={chatModalRef}>
+              <ChatModal selectedUser={selectedUser} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

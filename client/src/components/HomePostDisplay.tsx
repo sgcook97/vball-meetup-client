@@ -15,7 +15,6 @@ export default function HomePostDisplay() {
     const api = useApi();
 
     const [showChatModal, setShowChatModal] = useState(false);
-
     const chatModalRef = useRef<HTMLDivElement | null>(null);
 
     const fetchRecentPosts = async (page: number) => {
