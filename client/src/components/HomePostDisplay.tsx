@@ -76,8 +76,7 @@ export default function HomePostDisplay() {
                 <div className="fixed inset-0 flex items-center justify-center z-50 w-full">
                     <div className="absolute inset-0 bg-background opacity-75"></div>
                     <div className="relative rounded-lg bg-surface max-w-[30rem] min-w-[20rem] w-full">
-                        <div ref={chatModalRef} 
-                            className="">
+                        <div ref={chatModalRef}>
                             <ChatModal selectedUser={selectedUser} />
                         </div>
                     </div>
