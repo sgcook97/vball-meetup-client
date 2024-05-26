@@ -13,8 +13,12 @@ export function useSocket() {
         const initializeSocket = async () => {
             let token = getToken();
             if (!token) {
-                await authContext?.refreshToken();
-                token = getToken();
+                try {
+                    await authContext?.refreshToken();
+                    token = getToken();
+                } catch (error) {
+                    console.error('Error refreshing token:', error);
+                }
             }
 
             if (token) {
