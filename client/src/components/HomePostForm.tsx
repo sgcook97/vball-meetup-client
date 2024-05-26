@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import getUser from "../services/get-user";
+import { useContext, useEffect, useRef, useState } from "react";
 import PostForm from "./PostForm";
+import { AuthContext } from "../services/AuthContext";
 
 export default function HomePostForm() {
-    const currentUser = getUser();
+    const currentUser = useContext(AuthContext)?.currentUser;
     const [showPostForm, setShowPostForm] = useState(false);
     const formRef = useRef<HTMLDivElement | null>(null);
 
