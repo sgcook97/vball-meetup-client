@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../services/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -62,8 +62,8 @@ export default function Login() {
                 </button>
             </form>
             <div className='flex flex-col text-center'>
-                <a className='text-onBackground hover:text-secondary transition underline' href='/register'>Don't have an account?</a>
-                <a className='text-onBackground hover:text-secondary transition underline' href="/forgot-password">Forgot password?</a>
+                <Link className='text-onBackground hover:text-secondary transition underline' to='/register'>Don't have an account?</Link>
+                <Link className='text-onBackground hover:text-secondary transition underline' to="/forgot-password">Forgot password?</Link>
             </div>
             <ToastContainer />
         </div>

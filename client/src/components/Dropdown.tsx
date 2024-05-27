@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { CiMenuBurger } from "react-icons/ci";
+import { Link } from 'react-router-dom';
 
 export default function Dropdown() {
     const [isOpen, setIsOpen] = useState(false);
@@ -39,54 +40,54 @@ export default function Dropdown() {
                     border-onBackground/10 border-[0.5px] bg-background flex">
                     <ul className='w-full'>
                         <li>
-                            <a
-                                href="/" 
+                            <Link
+                                to="/" 
                                 onClick={closeMenu}
                                 className='hover:text-onBackground/80 text-onBackground  
                                 transition duration-200 hover:ease-in pl-1'
                             >
                                 Home
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="/find-group" 
+                            <Link
+                                to="/find-group" 
                                 onClick={closeMenu}
                                 className='hover:text-onBackground/80 text-onBackground  
                                 transition duration-200 hover:ease-in pl-1'
                             >
                                 Find Group
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="/create-post" 
+                            <Link
+                                to="/create-post" 
                                 onClick={closeMenu}
                                 className='hover:text-onBackground/80 text-onBackground  
                                 transition duration-200 hover:ease-in pl-1'
                             >
                                 Create Post
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="/profile" 
-                                onClick={closeMenu}
-                                className='hover:text-onBackground/80 text-onBackground  
-                                transition duration-200 hover:ease-in pl-1'
-                            >
-                                Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="/chat" 
+                            <Link
+                                to="/chat" 
                                 onClick={closeMenu}
                                 className='hover:text-onBackground/80 text-onBackground  
                                 transition duration-200 hover:ease-in pl-1'
                             >
                                 Chat
-                            </a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/profile" 
+                                onClick={closeMenu}
+                                className='hover:text-onBackground/80 text-onBackground  
+                                transition duration-200 hover:ease-in pl-1'
+                            >
+                                Profile
+                            </Link>
                         </li>
                     </ul>
                 </div>

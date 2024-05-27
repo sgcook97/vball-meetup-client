@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import useApi from '../config/axiosConfig';
 import PostCard from './PostCard';
 import ChatModal from './ChatModal';
+import { Link } from 'react-router-dom';
 
 interface SelectedUser {
     userId: string;
@@ -70,12 +71,12 @@ export default function HomePostDisplay() {
                     ))
                 )}
             </div>
-            <a href="/find-group" 
+            <Link to="/find-group" 
                 className='text-onPrimary bg-primary hover:bg-secondary
                 hover:text-onSecondary transition duration-200 rounded-lg px-4 py-2 mt-4'
             >
                 See more
-            </a>
+            </Link>
             {showChatModal && selectedUser && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 w-full">
                     <div className="absolute inset-0 bg-background opacity-75"></div>
