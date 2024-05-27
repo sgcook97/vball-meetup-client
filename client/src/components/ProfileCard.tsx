@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../services/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function ProfileCard() {
     const authContext = useContext(AuthContext);
@@ -39,12 +40,12 @@ export default function ProfileCard() {
                 </div> 
             </div>
             <div className='mt-4 flex justify-center items-center'>
-                <a className='bg-onSurface/30 text-center rounded-md
+                <Link className='bg-onSurface/30 text-center rounded-md
                     px-3 py-1 hover:bg-primary transition hover:text-onPrimary' 
-                    href="/edit-profile"
+                    to="/edit-profile"
                 >
                     Edit Profile
-                </a>
+                </Link>
             </div>
             
         </div>
