@@ -1,7 +1,7 @@
 export default function WeatherSkeleton() {
     return (
         <div className='py-4 bg-onSurface/5 animate-pulse w-full flex flex-col justify-center items-center
-            h-[262px] rounded-lg border-2 border-onSurface/15 overflow-hidden'
+            h-[318px] rounded-lg border-2 border-onSurface/15 overflow-hidden'
         >
             <div className="bg-onSurface/10 w-[4rem] h-[3rem] my-1 rounded-md"></div>
             <div className="bg-onSurface/10 w-[1.7rem] h-[1.7rem] mt-4 mb-1 rounded-md"></div>

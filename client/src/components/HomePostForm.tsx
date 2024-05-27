@@ -25,9 +25,9 @@ export default function HomePostForm() {
     })
 
     return (
-        <div className="py-4 bg-onSurface/5 text-onSurface flex w-full rounded-lg border-2 border-onSurface/10 justify-between items-center px-10">
+        <div className="py-4 bg-onSurface/5 text-onSurface flex w-full rounded-lg border-2 border-onSurface/10 justify-between items-center px-5">
             <a href="/profile" className="text-primary font-semibold text-lg">{currentUser?.username}</a>
-            <div onClick={handleClickForm} className="bg-onSurface/15 w-[80%] py-1 px-2 rounded-full hover:cursor-pointer">Make a post</div>
+            <div onClick={handleClickForm} className="bg-onSurface/15 w-[80%] py-1 px-2 ml-2 rounded-full hover:cursor-pointer">Post Something...</div>
             {showPostForm &&
                 <div className="fixed inset-0 flex items-center justify-center z-50 w-full">
                     <div className="absolute inset-0 bg-background opacity-75"></div>

@@ -4,16 +4,21 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import { skillLevels } from '../lib/data';
+import { useState } from 'react';
+import { FaSearch } from "react-icons/fa";
+import axios from 'axios';
 
 interface PostFormProps {
   handleClickForm?: () => void;
 }
 
+const NOMINATIM_URL = import.meta.env.VITE_NOMINATIM_API_URL;
 
 export default function PostForm( { handleClickForm } : PostFormProps) {
 
   const api = useApi();
   const user = getUser();
+  const [locationName, setLocationName] = useState<string>('');
 
   const formik = useFormik({
     initialValues: {
@@ -37,6 +42,10 @@ export default function PostForm( { handleClickForm } : PostFormProps) {
         values.skillLevel = 'Any';
       }
 
+      if (locationName) {
+        values.location = locationName
+      }
+
       try {
         await api.post('/post/create-post', values);
         toast.success('Successfully created post!', {
@@ -49,6 +58,15 @@ export default function PostForm( { handleClickForm } : PostFormProps) {
     }
   });
 
+  async function handleSearchLocation() {
+    try {
+      const res = await axios.get(`${NOMINATIM_URL}/search?q=${formik.values.location}&format=json&limit=1`);
+      setLocationName(`${res.data[0].display_name.split(', ')[0]}, ${res.data[0].display_name.split(', ')[2]}`);
+    } catch (error) {
+      console.error('Error searching location:', error);
+    }
+  }
+      
   return (
     <div className='flex flex-col items-center justify-center max-w-[25rem] min-w-[15rem] w-[80%]'>
       <form onSubmit={formik.handleSubmit} className='flex flex-col items-center justify-center gap-2 w-full'>
@@ -96,23 +114,30 @@ export default function PostForm( { handleClickForm } : PostFormProps) {
             ? formik.errors.location
             : "Location"}
           </label>
-          <input
-            name="location"
-            id="location"
-            type='text'
-            placeholder='Location'
-            className={`border-2 p-2 focus:outline-none rounded-md w-full 
-            bg-onBackground/[0.01] pl-1 py-1
-            ${
-            formik.touched.location &&
-            formik.errors.location
-              ? "border-red-500 focus:border-red-500"
-              : "focus:border-secondary border-onSurface/10"
-            }`}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.location}
-          />
+          <div className='flex items-center justify-between'>
+            <input
+              name="location"
+              id="location"
+              type='text'
+              placeholder='Location'
+              className={`border-2 border-r-0 p-2 focus:outline-none rounded-md rounded-r-none w-[calc(100%-3rem)] 
+              bg-onBackground/[0.01] pl-1 py-1
+              ${
+              formik.touched.location &&
+              formik.errors.location
+                ? "border-red-500 focus:border-red-500"
+                : "focus:border-secondary border-onSurface/10"
+              }`}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.location}
+            />
+            <FaSearch className='bg-onSurface/10 h-[36px] w-[3rem] py-2 hover:cursor-pointer
+              px-2 rounded-r-md hover:bg-secondary hover:text-onSecondary transition duration-200' 
+              onClick={handleSearchLocation} 
+              size={20} 
+            />
+          </div>
         </div>
         <div className='flex flex-col w-full'>
           <label
